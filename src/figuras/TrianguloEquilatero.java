@@ -6,16 +6,15 @@ import interfaces.IMedidas;
 public class TrianguloEquilatero extends Triangulo implements IMedidas {
 
     private double lado;
-    private double altura;
 
     public TrianguloEquilatero(Double lado) {
         this.lado = lado;
+        this.altura = calcularAltura();
     }
 
     @Override
     public double calcularAltura() {
-        this.altura = ((Math.sqrt(3)*this.lado) / 2);
-        return this.altura;
+        return ((Math.sqrt(3)*this.lado) / 2);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class TrianguloEquilatero extends Triangulo implements IMedidas {
 
     @Override
     public double calcularArea() {
-        return ((lado * calcularAltura())/2);
+        return ((lado * altura)/2);
     }
 
     @Override

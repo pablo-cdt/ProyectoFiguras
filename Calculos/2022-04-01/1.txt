@@ -1,0 +1,4 @@
+Figura seleccionada: Circulo
+radio ingresado = 1.0
+perimetro = 6.283185307179586
+area = 3.141592653589793

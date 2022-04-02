@@ -7,17 +7,16 @@ public class TrianguloIsosceles extends Triangulo implements IMedidas {
 
     private double lado;
     private double base;
-    private double altura;
 
     public TrianguloIsosceles(double base, double lado) {
         this.base = base;
         this.lado = lado;
+        this.altura = calcularAltura();
     }
 
     @Override
     public double calcularAltura() {
-        this.altura = Math.sqrt(Math.pow(this.lado,2) - (Math.pow(this.base,2)/4));
-        return this.altura;
+        return Math.sqrt(Math.pow(this.lado,2) - (Math.pow(this.base,2)/4));
     }
 
     @Override
@@ -27,7 +26,7 @@ public class TrianguloIsosceles extends Triangulo implements IMedidas {
 
     @Override
     public double calcularArea() {
-        return (calcularAltura() * this.base) /2;
+        return (altura * this.base) /2;
     }
 
     @Override

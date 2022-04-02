@@ -1,0 +1,4 @@
+Figura seleccionada: Cuadrado
+lado ingresado = 2.0
+perimetro = 8.0
+area = 4.0

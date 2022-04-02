@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 
 public class CalculosFiguraService {
 
-    public static void calcularFiguras(){
+    public static void calcularFiguras() {
+        Thread t2 = null;
         ProcesosEnum procesoActual = ProcesosEnum.INGRESO_FIGURA;
         TipoFigurasEnum figura = null;
         boolean procesoCompletado = false;
@@ -30,7 +31,6 @@ public class CalculosFiguraService {
                 switch (procesoActual) {
                     case INGRESO_FIGURA:
                         figura = getNombre(sb.toString());
-                        System.out.println("figura = " + figura);
 
                     case INGRESO_VALORES:
                         // TODO: Pedir valores para los cálculos
@@ -39,21 +39,24 @@ public class CalculosFiguraService {
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_RADIO, Mensajes.UNIDAD_MEDIDA_CM));
                                 double radio = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 figuraElegida = new Circulo(radio);
-                                sb = new StringBuilder(String.format(Mensajes.MENSAJE_FINAL,figura.getNombre(),figuraElegida.calcularPerimetro(),Mensajes.UNIDAD_MEDIDA_CM,figuraElegida.calcularArea(),Mensajes.UNIDAD_MEDIDA_CM));
+                                t2 = new Thread(new GuardarCalculosService(figuraElegida));
+                                t2.start();
                                 break;
                             case CUADRADO:
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_LADO,Mensajes.UNIDAD_MEDIDA_CM));
                                 double lado = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 figuraElegida = new Cuadrado(lado);
-                                sb = new StringBuilder(String.format(Mensajes.MENSAJE_FINAL,figura.getNombre(),figuraElegida.calcularPerimetro(),Mensajes.UNIDAD_MEDIDA_CM,figuraElegida.calcularArea(),Mensajes.UNIDAD_MEDIDA_CM));
+                                t2 = new Thread(new GuardarCalculosService(figuraElegida));
+                                t2.start();
                                 break;
                             case RECTANGULO:
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_BASE,Mensajes.UNIDAD_MEDIDA_CM));
                                 double base = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_ALTURA,Mensajes.UNIDAD_MEDIDA_CM));
-                                double altura = Double.parseDouble(JOptionPane.showInputDialog(Mensajes.INGRESO_ALTURA, Mensajes.UNIDAD_MEDIDA_CM));
+                                double altura = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 figuraElegida = new Rectangulo(base, altura);
-                                sb = new StringBuilder(String.format(Mensajes.MENSAJE_FINAL,figura.getNombre(),figuraElegida.calcularPerimetro(),Mensajes.UNIDAD_MEDIDA_CM,figuraElegida.calcularArea(),Mensajes.UNIDAD_MEDIDA_CM));
+                                t2 = new Thread(new GuardarCalculosService(figuraElegida));
+                                t2.start();
                                 break;
                             case TRIANGULO_ISOSCELES:
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_BASE,Mensajes.UNIDAD_MEDIDA_CM));
@@ -61,16 +64,17 @@ public class CalculosFiguraService {
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_LADO,Mensajes.UNIDAD_MEDIDA_CM));
                                 lado = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 figuraElegida = new TrianguloIsosceles(base, lado);
-                                sb = new StringBuilder(String.format(Mensajes.MENSAJE_FINAL,figura.getNombre(),figuraElegida.calcularPerimetro(),Mensajes.UNIDAD_MEDIDA_CM,figuraElegida.calcularArea(),Mensajes.UNIDAD_MEDIDA_CM));
+                                t2 = new Thread(new GuardarCalculosService(figuraElegida));
+                                t2.start();
                                 break;
                             case TRIANGULO_EQUILATERO:
                                 sb = new StringBuilder(String.format(Mensajes.INGRESO_LADO,Mensajes.UNIDAD_MEDIDA_CM));
                                 lado = Double.parseDouble(JOptionPane.showInputDialog(sb));
                                 figuraElegida = new TrianguloEquilatero(lado);
-                                sb = new StringBuilder(String.format(Mensajes.MENSAJE_FINAL,figura.getNombre(),figuraElegida.calcularPerimetro(),Mensajes.UNIDAD_MEDIDA_CM,figuraElegida.calcularArea(),Mensajes.UNIDAD_MEDIDA_CM));
+                                t2 = new Thread(new GuardarCalculosService(figuraElegida));
+                                t2.start();
                                 break;
                         }
-                        JOptionPane.showMessageDialog(null, sb);
                 }
                 procesoCompletado = true;
             } catch (ProcesoInterrumpidoException ex) {
