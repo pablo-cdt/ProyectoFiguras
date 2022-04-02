@@ -14,13 +14,13 @@ import java.util.stream.Stream;
 public class CalculosFiguraService {
 
     public static void calcularFiguras() {
-        Thread t2 = null;
+        Thread t2;
         ProcesosEnum procesoActual = ProcesosEnum.INGRESO_FIGURA;
         TipoFigurasEnum figura = null;
         boolean procesoCompletado = false;
         StringBuilder sb = new StringBuilder(Mensajes.INGRESO_OPCION_FIGURA);
         TipoFigurasEnum[] figuras = TipoFigurasEnum.values();
-        IMedidas figuraElegida = null;
+        IMedidas figuraElegida;
 
         for(TipoFigurasEnum f : figuras) {
             sb.append(String.format(Mensajes.FORMATO_OPCIONES_FIGURAS, f.getOpcion(), f.getNombre()));

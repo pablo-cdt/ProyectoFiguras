@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class GuardarCalculosService implements Runnable{
     private static IMedidas figura;
+    private static JOptionPane pane = new JOptionPane();
     GuardarCalculosService(IMedidas figura){
         this.figura = figura;
     }
@@ -27,6 +28,8 @@ public class GuardarCalculosService implements Runnable{
             printWriter.close();
         }catch (Exception e){
         }
+
+        JOptionPane.showMessageDialog(pane,Mensajes.ARCHIVO_GENERADO);
     }
 
     public static String crearNuevoArchivo() {
@@ -37,11 +40,11 @@ public class GuardarCalculosService implements Runnable{
         String rutaArchivo = "";
         try {
             do {
-                nombreArchivo = JOptionPane.showInputDialog(Mensajes.PEDIR_NOMBRE_ARCHIVO);
+                nombreArchivo = JOptionPane.showInputDialog(pane,Mensajes.PEDIR_NOMBRE_ARCHIVO);
                 rutaArchivo = String.format(Mensajes.RUTA_ARCHIVO, todaysDate, "/", nombreArchivo);
                 File archivo = new File(rutaArchivo);
                 if (archivo.exists()) {
-                    String decision = JOptionPane.showInputDialog(Mensajes.CONFIRMACION_SOBREESCRITURA);
+                    String decision = JOptionPane.showInputDialog(pane,Mensajes.CONFIRMACION_SOBREESCRITURA);
                     if (decision.equalsIgnoreCase(Mensajes.CONFIRMACION)) {
                         archivo.createNewFile();
                         nombreIngresadoCorrectamente = true;
