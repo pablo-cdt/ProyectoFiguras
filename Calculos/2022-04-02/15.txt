@@ -1,0 +1,5 @@
+Figura seleccionada: Rectangulo
+base ingresada = 3.0
+altura ingresada = 2.0
+perimetro = 10.0
+area = 6.0
